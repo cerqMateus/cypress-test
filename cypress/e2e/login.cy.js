@@ -1,11 +1,12 @@
-import Login from "../pages/login";
-
 describe("Login", () => {
   it("Realizar login com sucesso", () => {
     //Arrange
-    Login.visitarPagina();
+    cy.visit("https://www.saucedemo.com/v1/");
     //Act
-    Login.preencherCredenciaisValidas();
+
+    cy.get('[data-test="username"]').type("standard_user");
+    cy.get('[data-test="password"]').type("secret_sauce");
+    cy.get("#login-button").click();
 
     //Assert
 
@@ -20,11 +21,9 @@ describe("Login inválido", () => {
 
     //Act
 
-    cy.get().type("invalid-user");
-
-    cy.get().type("invalid-password");
-
-    cy.get().click();
+    cy.get('[data-test="username"]').type("invalid_user");
+    cy.get('[data-test="password"]').type("invalid_password");
+    cy.get("#login-button").click();
 
     //Assert
 
